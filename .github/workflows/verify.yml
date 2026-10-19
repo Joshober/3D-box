@@ -1,0 +1,27 @@
+name: Verify package
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.0'
+          cache: npm
+      - run: npm ci --legacy-peer-deps
+      - run: npm test
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - run: npm run test:production
+      - run: npm audit --audit-level=high
+      - run: npm run pack:lib
+      - run: npm install ../../box-photo-viewer-1.2.0.tgz --legacy-peer-deps
+        working-directory: tests/consumer
+      - run: npx ng build consumer
+        working-directory: tests/consumer
+      - run: npm run test:consumer

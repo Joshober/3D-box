@@ -1,0 +1,24 @@
+{
+  "name": "box-photo-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node node_modules/@angular/cli/bin/ng.js serve demo --configuration development --host 127.0.0.1",
+    "build": "ng build box-photo-viewer && ng build demo",
+    "pack:lib": "npm pack ./dist/box-photo-viewer --pack-destination .",
+    "test": "tsx --test tests/*.test.ts",
+    "test:e2e": "playwright test",
+    "test:consumer": "node scripts/consumer-smoke.mjs",
+    "serve:production": "node scripts/serve-production.mjs",
+    "test:production": "node scripts/production-smoke.mjs"
+  },
+  "dependencies": {
+    "@angular/common": "22.2.3", "@angular/compiler": "22.2.3", "@angular/core": "22.2.3",
+    "@angular/platform-browser": "22.2.3", "rxjs": "~7.8.2", "three": "0.186.1", "tslib": "^2.8.1"
+  },
+  "devDependencies": {
+    "@angular/build": "22.2.3", "@angular/cli": "22.2.3", "@angular/compiler-cli": "22.2.3",
+    "@types/three": "^0.185.0", "ng-packagr": "^22.0.0", "typescript": "~6.0.0",
+    "node": "^24.15.0", "tsx": "^4.20.0", "@playwright/test": "^1.56.0"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "name": "box-photo-viewer", "version": "1.2.0", "description": "Six-face photo inspection and perspective alignment for Angular and Three.js",
+  "license": "MIT", "peerDependencies": { "@angular/common": "^22.0.0", "@angular/core": "^22.0.0", "three": "^0.186.1" },
+  "dependencies": { "tslib": "^2.8.1" }, "sideEffects": false
+}

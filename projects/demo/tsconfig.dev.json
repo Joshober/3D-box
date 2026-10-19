@@ -1,0 +1,4 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": { "paths": { "box-photo-viewer": ["../box-photo-viewer/src/public-api.ts"] } }
+}

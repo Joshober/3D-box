@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json", "version": 1,
+  "cli": { "analytics": false },
+  "projects": {
+    "box-photo-viewer": {
+      "projectType": "library", "root": "projects/box-photo-viewer", "sourceRoot": "projects/box-photo-viewer/src",
+      "architect": { "build": { "builder": "@angular/build:ng-packagr", "options": { "project": "projects/box-photo-viewer/ng-package.json", "tsConfig": "projects/box-photo-viewer/tsconfig.lib.json" } } }
+    },
+    "demo": {
+      "projectType": "application", "root": "projects/demo", "sourceRoot": "projects/demo/src",
+      "architect": {
+        "build": { "builder": "@angular/build:application", "defaultConfiguration": "production", "configurations": { "development": { "optimization": false, "sourceMap": true, "tsConfig": "projects/demo/tsconfig.dev.json" }, "production": { "optimization": { "scripts": true, "styles": { "minify": true, "inlineCritical": false }, "fonts": false }, "outputHashing": "all", "sourceMap": false, "budgets": [{ "type": "initial", "maximumWarning": "900kB", "maximumError": "1MB" }] } }, "options": { "outputPath": "dist/demo", "browser": "projects/demo/src/main.ts", "index": "projects/demo/src/index.html", "tsConfig": "projects/demo/tsconfig.app.json", "styles": ["projects/demo/src/styles.css"], "assets": [{ "glob": "**/*", "input": "projects/demo/public", "output": "/" }] } },
+        "serve": { "builder": "@angular/build:dev-server", "options": { "buildTarget": "demo:build" }, "configurations": { "development": { "buildTarget": "demo:build:development" } } }
+      }
+    }
+  }
+}
