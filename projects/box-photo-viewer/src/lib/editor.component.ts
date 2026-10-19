@@ -32,13 +32,13 @@ export class BoxPhotoEditorComponent implements OnChanges,OnDestroy {
   readonly cornerLabels=['top-left','top-right','bottom-right','bottom-left'];
   constructor(private cdr:ChangeDetectorRef,@Inject(PLATFORM_ID) private platform:object){}
   get polygon(){return [...this.points,...(this.points.length===4?[this.points[0]]:[])].map(p=>`${p.x*100},${p.y*100}`).join(' ');}
-  ngOnChanges(){this.abort?.abort();this.error='';this.original='';this.preview='';try{const corners=this.photo?.corners??DEFAULT_CORNERS;validateCorners(corners);this.points=corners.map(p=>({...p}));if(isPlatformBrowser(this.platform))void this.updatePreview();}catch{this.points=[];this.error='Invalid photo corners. Select four clockwise corners inside the photo.';}}
+  ngOnChanges(){this.abort?.abort();this.error='';this.original='';this.preview='';try{const corners=this.photo?.corners??DEFAULT_CORNERS;validateCorners(corners);this.points=corners.map(p=>({...p}));}catch{this.points=[];this.error='Invalid photo corners. Select four clockwise corners inside the photo.';}if(isPlatformBrowser(this.platform))void this.updatePreview();}
   startCorners(){this.points=[];this.error='';}
   addPoint(e:MouseEvent){if(this.points.length===4)this.points=[];const rect=(e.currentTarget as SVGElement).getBoundingClientRect();this.points=[...this.points,{x:(e.clientX-rect.left)/rect.width,y:(e.clientY-rect.top)/rect.height}];}
   coordinate(i:number,key:'x'|'y',event:Event){this.points=this.points.map((p,j)=>j===i?{...p,[key]:Number((event.target as HTMLInputElement).value)}:p);}
   apply(){if(!this.photo)return;try{const corners=this.points as FaceCorners;validateCorners(corners);this.error='';this.photoChange.emit({...this.photo,corners:corners.map(p=>({...p})) as FaceCorners});}catch(e){this.error=(e as Error).message;}}
   reset(){if(this.photo)this.photoChange.emit({...this.photo,corners:undefined,rotation:0});}
-  rotate(){if(this.photo)this.photoChange.emit({...this.photo,rotation:(((this.photo.rotation??0)+90)%360) as FacePhoto['rotation']});}
+  rotate(){if(!this.photo)return;try{validateCorners(this.points as FaceCorners);this.error='';this.photoChange.emit({...this.photo,corners:this.points.map(p=>({...p})) as FaceCorners,rotation:(((this.photo.rotation??0)+90)%360) as FacePhoto['rotation']});}catch{this.error='Select all four face corners before rotating.';}}
   private async updatePreview(){
     const g=++this.generation;const photo=this.photo;if(!photo)return;
     const controller=new AbortController();this.abort=controller;const options={signal:controller.signal,allowedOrigins:this.allowedOrigins};
