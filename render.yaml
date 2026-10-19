@@ -2,7 +2,6 @@ services:
   - type: web
     name: 3d-box-viewer
     runtime: static
-    plan: free
     buildCommand: npm install --legacy-peer-deps && npm run build
     staticPublishPath: dist/demo/browser
     headers:
