@@ -25,10 +25,10 @@ npm run test:production
 npm run serve:production
 ```
 
-Install `box-photo-viewer-1.2.0.tgz` in an Angular 22 project:
+Install from npm in an Angular 22 project:
 
 ```sh
-npm install "C:/Users/Josh/Downloads/3D box/box-photo-viewer-1.2.0.tgz" three@^0.186.1
+npm install box-photo-viewer three@^0.186.1
 npm install --save-dev @types/three
 ```
 
@@ -38,6 +38,6 @@ The production demo runs at http://127.0.0.1:8080 with restrictive headers and p
 
 The independent installation fixture is in `tests/consumer`. After packing, run `npm install --legacy-peer-deps` and `npx ng build consumer` from that directory under a supported Node runtime. Run `npm run test:consumer` from the workspace root to check its compiled production build, direct file inputs, origin restrictions, mouse rotation, zoom, and WebGL cleanup across five mount/unmount cycles.
 
-The package contains the viewer and editor; demo assets and styling stay in the demo. Nothing is published to npm. Photos are processed locally. Remote images need CORS permission. Visible damage stays in the photographs; there is no AI classification or dent reconstruction.
+The package contains the viewer and editor; demo assets and styling stay in the demo. The package is published to npm as [`box-photo-viewer`](https://www.npmjs.com/package/box-photo-viewer). Photos are processed locally. Remote images need CORS permission. Visible damage stays in the photographs; there is no AI classification or dent reconstruction.
 
 Sample attribution: [Meanwell Packaging](https://meanwell-packaging.co.uk/), [original photograph](https://commons.wikimedia.org/wiki/File:Damaged_Cardboard_Box_Labelled_Fragile.jpg); Tony Webster, [original photograph](https://commons.wikimedia.org/wiki/File:Damaged_FedEx_Box_-_Corner_Smashed_In_Cardboard_Shipping_Container_(53371562280).jpg). Both [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/). Bundled photographs are 1280px Wikimedia downloads. Face views are cropped and perspective corrected in the demo.

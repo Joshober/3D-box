@@ -7,7 +7,7 @@ Standalone Angular 22 components for inspecting six box photographs in Three.js.
 Use Node ^22.22.3 or ^24.15.0 (or >=26) for Angular 22 tooling.
 
 ```sh
-npm install ./box-photo-viewer-1.2.0.tgz three@^0.186.1
+npm install box-photo-viewer three@^0.186.1
 npm install --save-dev @types/three
 ```
 
